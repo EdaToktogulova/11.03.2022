@@ -37,7 +37,12 @@
          </div>   
       ), document.querySelector('#root'));
 
-         
+         function ArticleSummery(props){
+            return <article>
+               <h2><a href={props.url}>{props.title}</a></h2>
+               <p>{props.children}</p>
+               </article>
+         }
 
          function Larger(props){
             if (props.a > props.b) {
