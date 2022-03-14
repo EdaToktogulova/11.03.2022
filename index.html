@@ -10,49 +10,54 @@
 <body>
    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+   <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 
    <div id="root"></div>
-   <div id="rootReact"></div>
 
-   <script>
-      const div = document.createElement('div');
-      div.className = "hello-world";
-      document.querySelector('#root').append(div);
-      const span = document.createElement('span');
-      span.textContent = Math.random();
-      div.append(span);
-      const strong = document.createElement('strong');
-      strong.textContent = Math.random();
-      span.append(strong);
-      const mark = document.createElement('mark');
-      mark.textContent = " - this is random number";
-      span.append(mark);
+   <script type="text/babel">
+      ReactDOM.render((
+         <div>
+            <Person name="Eda" lastName="Toktogulova" />
+            <Sum a={5} b={10} />
+            <Sum a={10} b={5} />
+            <Larger a={10} b={5} />
+            <Larger a={5} b={10} />
+            <Smaller a={5} b={10}/>
+            <ArticleSummery
+            title="This is a sample acticle"
+            url="#">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis a explicabo totam, laudantium nobis doloremque nemo nisi iste expedita cupiditate odit! Nihil nesciunt provident ut laudantium eum soluta? Fugiat, autem.
+            </ArticleSummery>
+
+            
+
+         </div>   
+      ), document.querySelector('#root'));
+
+         function Larger(props){
+            if (props.a > props.b) {
+               return <div>{props.a}</div>
+            }
+            else {
+               return <div>{props.b}</div>
+            }
+
+            return <div></div>;
+         }
+      function Smaller(props) {
+         return <div>{props.b}</div>;
+      }
+
+      function Sum(props){
+         return <div>{props.a + props.b}</div>
+      }
+         
+      function Person(props) {
+         return <div>My name is {props.name} {props.lastName}</div>;
+      }
    </script>
 
-   <script>
-      const reactDiv = React.createElement("div", {
-         className: "hello world",
-         children: React.createElement('span', {
-            children: [
-               React.createElement('strong', {
-                  children: Math.random(),
-               }),
-               React.createElement('mark', {
-                  children: " - this is random number",
-               }),
-            ]
-         }),
-      });
-
-      React.createElement(
-         'div', // 1. tag
-         { className: 'hello-world'}, // 2. props - attributes
-         "test" // 3-N children
-
-      );
-
-      ReactDOM.render(reactDiv, document.querySelector('#rootReact'));
-   </script>
+   
 
    <script src="./script.js"></script>
 </body>
